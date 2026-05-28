@@ -71,8 +71,14 @@ const samePerformer = recordings.filter(
 
     <!-- Notes -->
     <section class="mb-12">
-      <h2 class="text-xl font-serif font-bold text-gold-800 mb-3">录音简介</h2>
-      <p class="text-gray-700 leading-relaxed">{rec.notes}</p>
+      <h2 class="text-xl font-serif font-bold text-gold-800 mb-3">简介</h2>
+      {rec.introduction ? (
+        <div class="text-gray-700 leading-relaxed space-y-4">
+          {rec.introduction.split('\n\n').map(p => <p>{p}</p>)}
+        </div>
+      ) : (
+        <p class="text-gray-700 leading-relaxed">{rec.notes}</p>
+      )}
     </section>
 
     <!-- Same performer -->

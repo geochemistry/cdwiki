@@ -180,10 +180,9 @@ const instrumentColors: Record<string, string> = {
 
   </div>
 
-  <script>
-    const allRecordings = {recordings};
-    const searchInput = document.getElementById('home-search') as HTMLInputElement;
-    const resultsDiv = document.getElementById('search-results')!;
+  <script define:vars={{ recordings }}>
+    const searchInput = document.getElementById('home-search');
+    const resultsDiv = document.getElementById('search-results');
 
     searchInput?.addEventListener('input', () => {
       const q = searchInput.value.toLowerCase().trim();
@@ -192,7 +191,7 @@ const instrumentColors: Record<string, string> = {
         return;
       }
 
-      const matches = allRecordings.filter((r: any) =>
+      const matches = recordings.filter(r =>
         r.performer.toLowerCase().includes(q) ||
         r.label.toLowerCase().includes(q) ||
         String(r.year).includes(q) ||
@@ -203,7 +202,7 @@ const instrumentColors: Record<string, string> = {
       if (matches.length === 0) {
         resultsDiv.innerHTML = '<div class="px-4 py-3 text-gray-400">没有找到匹配的录音</div>';
       } else {
-        resultsDiv.innerHTML = matches.map((r: any) => `
+        resultsDiv.innerHTML = matches.map(r => `
           <a href="/recordings/${r.id}" class="flex items-center gap-3 px-4 py-3 hover:bg-gold-50 transition-colors border-b border-gray-100 last:border-0">
             <div class="w-10 h-10 bg-gold-100 rounded overflow-hidden flex-shrink-0 flex items-center justify-center">
               <img src="${r.coverUrl}" alt="" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.innerHTML='<span>♪</span>'"/>
@@ -220,7 +219,7 @@ const instrumentColors: Record<string, string> = {
 
     // Close on click outside
     document.addEventListener('click', (e) => {
-      if (!searchInput?.contains(e.target as Node) && !resultsDiv?.contains(e.target as Node)) {
+      if (!searchInput?.contains(e.target) && !resultsDiv?.contains(e.target)) {
         resultsDiv?.classList.add('hidden');
       }
     });

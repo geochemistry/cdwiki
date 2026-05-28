@@ -1,0 +1,105 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import recordings from '../../data/recordings.json';
+
+export function getStaticPaths() {
+  return recordings.map(rec => ({
+    params: { id: rec.id },
+    props: { rec },
+  }));
+}
+
+const { rec } = Astro.props;
+
+const samePerformer = recordings.filter(
+  r => r.performer === rec.performer && r.id !== rec.id
+);
+---
+
+<Layout title={`${rec.performer} (${rec.year})`}>
+  <div class="max-w-5xl mx-auto px-4 py-8">
+    <a href="/recordings" class="text-gold-600 hover:text-gold-800 text-sm mb-6 inline-block">
+      &larr; 返回全部录音
+    </a>
+
+    <div class="grid md:grid-cols-2 gap-8 mb-12">
+      <!-- Cover -->
+      <div class="aspect-square bg-gold-100 rounded-lg overflow-hidden flex items-center justify-center">
+        <img
+          src={rec.coverUrl}
+          alt={`${rec.performer} - ${rec.year}`}
+          class="w-full h-full object-contain"
+          onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'text-8xl\'>♪</div>'"
+        />
+      </div>
+
+      <!-- Info -->
+      <div>
+        <h1 class="text-3xl font-serif font-bold text-gold-800 mb-2">{rec.performer}</h1>
+        <p class="text-xl text-gray-600 mb-6">{rec.year}</p>
+
+        {rec.isLandmark && (
+          <span class="inline-block mb-4 px-3 py-1 bg-gold-100 text-gold-700 text-sm rounded-full font-medium">
+            经典录音
+          </span>
+        )}
+
+        <dl class="space-y-4">
+          <div class="flex border-b border-gray-100 pb-3">
+            <dt class="w-24 text-gray-500 text-sm shrink-0">厂牌</dt>
+            <dd class="text-gray-900">{rec.label}</dd>
+          </div>
+          <div class="flex border-b border-gray-100 pb-3">
+            <dt class="w-24 text-gray-500 text-sm shrink-0">目录号</dt>
+            <dd class="text-gray-900">{rec.catalogNumber}</dd>
+          </div>
+          <div class="flex border-b border-gray-100 pb-3">
+            <dt class="w-24 text-gray-500 text-sm shrink-0">介质</dt>
+            <dd class="text-gray-900">{rec.format}</dd>
+          </div>
+          <div class="flex border-b border-gray-100 pb-3">
+            <dt class="w-24 text-gray-500 text-sm shrink-0">乐器</dt>
+            <dd class="text-gray-900">{rec.instrument}</dd>
+          </div>
+          <div class="flex border-b border-gray-100 pb-3">
+            <dt class="w-24 text-gray-500 text-sm shrink-0">国家</dt>
+            <dd class="text-gray-900">{rec.country}</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+    <!-- Notes -->
+    <section class="mb-12">
+      <h2 class="text-xl font-serif font-bold text-gold-800 mb-3">录音简介</h2>
+      <p class="text-gray-700 leading-relaxed">{rec.notes}</p>
+    </section>
+
+    <!-- Same performer -->
+    {samePerformer.length > 0 && (
+      <section>
+        <h2 class="text-xl font-serif font-bold text-gold-800 mb-4">
+          {rec.performer} 的其他录音
+        </h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {samePerformer.map(other => (
+            <a href={`/recordings/${other.id}`} class="card p-4 flex gap-4 items-center">
+              <div class="w-16 h-16 bg-gold-100 rounded overflow-hidden flex-shrink-0 flex items-center justify-center">
+                <img
+                  src={other.coverUrl}
+                  alt={`${other.performer} - ${other.year}`}
+                  class="w-full h-full object-cover"
+                  onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'text-2xl\'>♪</span>'"
+                />
+              </div>
+              <div>
+                <p class="font-bold text-gray-900">{other.year}</p>
+                <p class="text-sm text-gray-500">{other.label}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </div>
+</Layout>

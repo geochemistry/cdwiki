@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import recordings from '../data/recordings.json';
+---
+
+<Layout title="关于">
+  <div class="max-w-3xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-serif font-bold text-gold-800 mb-8">关于本站</h1>
+
+    <article class="prose prose-gold max-w-none">
+      <h2>哥德堡变奏曲</h2>
+      <p>
+        《哥德堡变奏曲》（BWV 988）是约翰·塞巴斯蒂安·巴赫（Johann Sebastian Bach）于 1741 年出版的键盘作品，
+        收录在《键盘练习曲集》第四册中。作品由一首咏叹调（Aria）和三十个变奏组成，以该咏叹调的低音线为基础进行变奏。
+      </p>
+      <p>
+        据传，此曲是巴赫为俄国驻萨克森大使凯泽林克伯爵（Count Kaiserling）所作，
+        由其宫廷羽管键琴手约翰·哥德堡（Johann Goldberg）演奏，用以帮助伯爵缓解失眠。
+        然而这一传说的真实性至今仍有争议。
+      </p>
+
+      <h2>录音历史</h2>
+      <p>
+        1933 年，波兰裔法国羽管键琴家万达·兰多芙斯卡（Wanda Landowska）录制了《哥德堡变奏曲》的首个完整录音，
+        开启了这部作品的录音传统。此后，无数钢琴家和羽管键琴家为这部杰作留下了各自的诠释。
+      </p>
+      <p>
+        其中最具里程碑意义的当属加拿大钢琴家格伦·古尔德（Glenn Gould）的两次录音——1955 年的传奇首录和 1981 年的深思熟虑的重录，
+        这对录音成为古典音乐史上最著名的"双子录音"。
+      </p>
+
+      <h2>关于本站</h2>
+      <p>
+        本站致力于收录和整理《哥德堡变奏曲》的录音 CD 信息，包括演奏家、录制年份、厂牌、介质类型等基本资料，
+        以及 CD 封面图片。目前收录了 {recordings.length} 条录音记录。
+      </p>
+      <p>
+        数据来源包括 MusicBrainz 开放音乐数据库和 Discogs 唱片数据库。
+        如有错误或遗漏，欢迎指正。
+      </p>
+
+      <h2>技术说明</h2>
+      <p>本站使用以下技术构建：</p>
+      <ul>
+        <li>Astro — 静态站点生成器</li>
+        <li>Tailwind CSS — 样式框架</li>
+        <li>Vercel — 托管平台</li>
+        <li>MusicBrainz / Cover Art Archive — 数据和封面来源</li>
+      </ul>
+    </article>
+  </div>
+</Layout>

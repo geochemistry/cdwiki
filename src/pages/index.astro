@@ -1,0 +1,84 @@
+---
+import Layout from '../layouts/Layout.astro';
+import recordings from '../data/recordings.json';
+
+const landmarks = recordings.filter(r => r.isLandmark);
+const totalRecordings = recordings.length;
+const yearSpan = `${Math.min(...recordings.map(r => r.year))} – ${Math.max(...recordings.map(r => r.year))}`;
+const performers = [...new Set(recordings.map(r => r.performer))].length;
+---
+
+<Layout title="首页">
+  <div class="max-w-7xl mx-auto px-4 py-12">
+    <!-- Hero -->
+    <section class="text-center mb-16">
+      <h1 class="text-4xl sm:text-5xl font-serif font-bold text-gold-800 mb-4">
+        巴赫哥德堡变奏曲录音百科
+      </h1>
+      <p class="text-xl text-gray-600 mb-2">BWV 988 &middot; Goldberg Variations</p>
+      <p class="text-gray-500 max-w-2xl mx-auto">
+        收录自 1933 年 Wanda Landowska 首次完整录音以来的经典演奏版本，
+        涵盖钢琴与羽管键琴等多种演绎方式。
+      </p>
+      <a href="/recordings" class="btn btn-primary mt-8 inline-block">
+        浏览全部录音 &rarr;
+      </a>
+    </section>
+
+    <!-- Stats -->
+    <section class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-16">
+      <div class="card p-6 text-center">
+        <div class="text-3xl font-bold text-gold-700">{totalRecordings}</div>
+        <div class="text-gray-500 text-sm mt-1">收录录音</div>
+      </div>
+      <div class="card p-6 text-center">
+        <div class="text-3xl font-bold text-gold-700">{performers}</div>
+        <div class="text-gray-500 text-sm mt-1">演奏家</div>
+      </div>
+      <div class="card p-6 text-center">
+        <div class="text-3xl font-bold text-gold-700">{yearSpan}</div>
+        <div class="text-gray-500 text-sm mt-1">时间跨度</div>
+      </div>
+      <div class="card p-6 text-center">
+        <div class="text-3xl font-bold text-gold-700">2</div>
+        <div class="text-gray-500 text-sm mt-1">乐器类型</div>
+      </div>
+    </section>
+
+    <!-- Landmark recordings -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-serif font-bold text-gold-800 mb-6">经典录音</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {landmarks.map(rec => (
+          <a href={`/recordings/${rec.id}`} class="card group">
+            <div class="aspect-square bg-gold-100 flex items-center justify-center overflow-hidden">
+              <img
+                src={rec.coverUrl}
+                alt={`${rec.performer} - ${rec.year}`}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                loading="lazy"
+                onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'text-6xl\'>♪</div>'"
+              />
+            </div>
+            <div class="p-4">
+              <h3 class="font-bold text-gray-900">{rec.performer}</h3>
+              <p class="text-gold-600 text-sm">{rec.year} &middot; {rec.label}</p>
+              <p class="text-gray-500 text-sm mt-1 line-clamp-2">{rec.instrument}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- About preview -->
+    <section class="card p-8 text-center">
+      <h2 class="text-2xl font-serif font-bold text-gold-800 mb-4">关于哥德堡变奏曲</h2>
+      <p class="text-gray-600 max-w-3xl mx-auto mb-4">
+        《哥德堡变奏曲》（BWV 988）是约翰·塞巴斯蒂安·巴赫于 1741 年出版的键盘作品，
+        由一首咏叹调和三十个变奏组成。它是巴洛克时期最宏伟的键盘作品之一，
+        也是音乐史上最深邃、最复杂的变奏曲。
+      </p>
+      <a href="/about" class="btn btn-outline">了解更多 &rarr;</a>
+    </section>
+  </div>
+</Layout>

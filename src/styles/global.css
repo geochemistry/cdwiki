@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gold-50 text-gray-900 antialiased;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-lg shadow-md overflow-hidden transition-shadow hover:shadow-lg;
+  }
+  .btn {
+    @apply px-4 py-2 rounded-md font-medium transition-colors;
+  }
+  .btn-primary {
+    @apply bg-gold-600 text-white hover:bg-gold-700;
+  }
+  .btn-outline {
+    @apply border border-gold-600 text-gold-700 hover:bg-gold-100;
+  }
+  .filter-chip {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm border border-gold-300 bg-white hover:bg-gold-100 cursor-pointer transition-colors;
+  }
+  .filter-chip-active {
+    @apply bg-gold-600 text-white border-gold-600;
+  }
+}

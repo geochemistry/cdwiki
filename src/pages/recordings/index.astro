@@ -1,0 +1,240 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import recordings from '../../data/recordings.json';
+
+const performers = [...new Set(recordings.map(r => r.performer))].sort();
+const instruments = [...new Set(recordings.map(r => r.instrument))].sort();
+const labels = [...new Set(recordings.map(r => r.label))].sort();
+const years = recordings.map(r => r.year);
+const minYear = Math.min(...years);
+const maxYear = Math.max(...years);
+---
+
+<Layout title="全部录音">
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <h1 class="text-3xl font-serif font-bold text-gold-800 mb-6">全部录音</h1>
+
+    <div class="flex flex-col lg:flex-row gap-8">
+      <!-- Filter panel -->
+      <aside class="lg:w-64 shrink-0">
+        <div class="card p-5 sticky top-4 space-y-6">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">搜索</label>
+            <input
+              type="text"
+              id="search-input"
+              placeholder="演奏家、厂牌..."
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold-400 text-sm"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">乐器</label>
+            <div class="flex flex-wrap gap-2" id="instrument-filter">
+              <button class="filter-chip filter-chip-active" data-value="all">全部</button>
+              {instruments.map(inst => (
+                <button class="filter-chip" data-value={inst}>{inst}</button>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+              年份范围：<span id="year-display">{minYear} – {maxYear}</span>
+            </label>
+            <div class="flex gap-2 items-center">
+              <input
+                type="range"
+                id="year-min"
+                min={minYear}
+                max={maxYear}
+                value={minYear}
+                class="w-full accent-gold-600"
+              />
+              <input
+                type="range"
+                id="year-max"
+                min={minYear}
+                max={maxYear}
+                value={maxYear}
+                class="w-full accent-gold-600"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">演奏家</label>
+            <select
+              id="performer-filter"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-gold-400"
+            >
+              <option value="all">全部演奏家</option>
+              {performers.map(p => <option value={p}>{p}</option>)}
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">厂牌</label>
+            <select
+              id="label-filter"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-gold-400"
+            >
+              <option value="all">全部厂牌</option>
+              {labels.map(l => <option value={l}>{l}</option>)}
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">排序</label>
+            <select
+              id="sort-select"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-gold-400"
+            >
+              <option value="year-asc">年份（早 → 晚）</option>
+              <option value="year-desc">年份（晚 → 早）</option>
+              <option value="performer-asc">演奏家（A → Z）</option>
+              <option value="performer-desc">演奏家（Z → A）</option>
+            </select>
+          </div>
+
+          <button id="reset-btn" class="btn btn-outline w-full text-sm">重置筛选</button>
+        </div>
+      </aside>
+
+      <!-- Results -->
+      <div class="flex-1">
+        <div class="flex justify-between items-center mb-4">
+          <p class="text-gray-500 text-sm">
+            共 <span id="result-count">{recordings.length}</span> 条录音
+          </p>
+        </div>
+        <div id="recordings-grid" class="grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
+          {recordings.map(rec => (
+            <a href={`/recordings/${rec.id}`} class="card group recording-item"
+              data-performer={rec.performer}
+              data-year={rec.year}
+              data-instrument={rec.instrument}
+              data-label={rec.label}
+              data-id={rec.id}
+            >
+              <div class="aspect-square bg-gold-100 flex items-center justify-center overflow-hidden">
+                <img
+                  src={rec.coverUrl}
+                  alt={`${rec.performer} - ${rec.year}`}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  loading="lazy"
+                  onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'text-6xl\'>♪</div>'"
+                />
+              </div>
+              <div class="p-4">
+                <h3 class="font-bold text-gray-900">{rec.performer}</h3>
+                <p class="text-gold-600 text-sm">{rec.year} &middot; {rec.label}</p>
+                <p class="text-gray-500 text-sm">{rec.instrument}</p>
+                {rec.isLandmark && (
+                  <span class="inline-block mt-2 px-2 py-0.5 bg-gold-100 text-gold-700 text-xs rounded-full">经典</span>
+                )}
+              </div>
+            </a>
+          ))}
+        </div>
+        <div id="no-results" class="hidden text-center py-16 text-gray-400">
+          <p class="text-4xl mb-4">♪</p>
+          <p>没有找到符合条件的录音</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const allItems = document.querySelectorAll('.recording-item');
+    const searchInput = document.getElementById('search-input') as HTMLInputElement;
+    const yearMin = document.getElementById('year-min') as HTMLInputElement;
+    const yearMax = document.getElementById('year-max') as HTMLInputElement;
+    const yearDisplay = document.getElementById('year-display')!;
+    const performerFilter = document.getElementById('performer-filter') as HTMLSelectElement;
+    const labelFilter = document.getElementById('label-filter') as HTMLSelectElement;
+    const instrumentFilter = document.getElementById('instrument-filter')!;
+    const sortSelect = document.getElementById('sort-select') as HTMLSelectElement;
+    const resultCount = document.getElementById('result-count')!;
+    const grid = document.getElementById('recordings-grid')!;
+    const noResults = document.getElementById('no-results')!;
+    const resetBtn = document.getElementById('reset-btn')!;
+
+    let activeInstrument = 'all';
+
+    instrumentFilter.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement).closest('button');
+      if (!btn) return;
+      instrumentFilter.querySelectorAll('button').forEach(b => b.classList.remove('filter-chip-active'));
+      btn.classList.add('filter-chip-active');
+      activeInstrument = btn.dataset.value || 'all';
+      applyFilters();
+    });
+
+    function applyFilters() {
+      const query = searchInput.value.toLowerCase().trim();
+      const yMin = parseInt(yearMin.value);
+      const yMax = parseInt(yearMax.value);
+      const performer = performerFilter.value;
+      const label = labelFilter.value;
+
+      yearDisplay.textContent = `${yMin} – ${yMax}`;
+
+      const items = Array.from(allItems) as HTMLElement[];
+      let visible = 0;
+
+      items.forEach(item => {
+        const matchesSearch = !query ||
+          item.dataset.performer?.toLowerCase().includes(query) ||
+          item.dataset.label?.toLowerCase().includes(query) ||
+          item.dataset.id?.toLowerCase().includes(query);
+
+        const year = parseInt(item.dataset.year || '0');
+        const matchesYear = year >= yMin && year <= yMax;
+        const matchesPerformer = performer === 'all' || item.dataset.performer === performer;
+        const matchesLabel = label === 'all' || item.dataset.label === label;
+        const matchesInstrument = activeInstrument === 'all' || item.dataset.instrument === activeInstrument;
+
+        const show = matchesSearch && matchesYear && matchesPerformer && matchesLabel && matchesInstrument;
+        item.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+
+      resultCount.textContent = String(visible);
+      noResults.classList.toggle('hidden', visible > 0);
+      grid.classList.toggle('hidden', visible === 0);
+    }
+
+    searchInput.addEventListener('input', applyFilters);
+    yearMin.addEventListener('input', applyFilters);
+    yearMax.addEventListener('input', applyFilters);
+    performerFilter.addEventListener('change', applyFilters);
+    labelFilter.addEventListener('change', applyFilters);
+    sortSelect.addEventListener('change', () => {
+      const [key, dir] = sortSelect.value.split('-');
+      const items = Array.from(allItems) as HTMLElement[];
+      items.sort((a, b) => {
+        const va = a.dataset[key === 'year' ? 'year' : 'performer'] || '';
+        const vb = b.dataset[key === 'year' ? 'year' : 'performer'] || '';
+        const cmp = key === 'year'
+          ? parseInt(va) - parseInt(vb)
+          : va.localeCompare(vb);
+        return dir === 'desc' ? -cmp : cmp;
+      });
+      items.forEach(item => grid.appendChild(item));
+    });
+
+    resetBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      yearMin.value = yearMin.min;
+      yearMax.value = yearMax.max;
+      performerFilter.value = 'all';
+      labelFilter.value = 'all';
+      sortSelect.value = 'year-asc';
+      instrumentFilter.querySelectorAll('button').forEach(b => b.classList.remove('filter-chip-active'));
+      instrumentFilter.querySelector('button')?.classList.add('filter-chip-active');
+      activeInstrument = 'all';
+      applyFilters();
+    });
+  </script>
+</Layout>

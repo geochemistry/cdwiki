@@ -162,6 +162,21 @@ const maxYear = Math.max(...years);
 
     let activeInstrument = 'all';
 
+    // Apply URL query params on load
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('search')) searchInput.value = params.get('search')!;
+    if (params.get('instrument')) {
+      const inst = params.get('instrument')!;
+      activeInstrument = inst;
+      instrumentFilter.querySelectorAll('button').forEach(b => {
+        b.classList.toggle('filter-chip-active', b.dataset.value === inst);
+      });
+    }
+    if (params.get('yearMin')) yearMin.value = params.get('yearMin')!;
+    if (params.get('yearMax')) yearMax.value = params.get('yearMax')!;
+    if (params.get('performer')) performerFilter.value = params.get('performer')!;
+    if (params.get('label')) labelFilter.value = params.get('label')!;
+
     instrumentFilter.addEventListener('click', (e) => {
       const btn = (e.target as HTMLElement).closest('button');
       if (!btn) return;
@@ -204,6 +219,9 @@ const maxYear = Math.max(...years);
       noResults.classList.toggle('hidden', visible > 0);
       grid.classList.toggle('hidden', visible === 0);
     }
+
+    // Run initial filter from URL params
+    applyFilters();
 
     searchInput.addEventListener('input', applyFilters);
     yearMin.addEventListener('input', applyFilters);

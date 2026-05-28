@@ -6,23 +6,37 @@ const landmarks = recordings.filter(r => r.isLandmark);
 const totalRecordings = recordings.length;
 const yearSpan = `${Math.min(...recordings.map(r => r.year))} – ${Math.max(...recordings.map(r => r.year))}`;
 const performers = [...new Set(recordings.map(r => r.performer))].length;
+
+const allPerformers = [...new Set(recordings.map(r => r.performer))].sort();
+const allLabels = [...new Set(recordings.map(r => r.label))].sort();
 ---
 
 <Layout title="首页">
   <div class="max-w-7xl mx-auto px-4 py-12">
-    <!-- Hero -->
+    <!-- Hero + Search -->
     <section class="text-center mb-16">
       <h1 class="text-4xl sm:text-5xl font-serif font-bold text-gold-800 mb-4">
         我收藏的唱片
       </h1>
-      <p class="text-xl text-gray-600 mb-2">BWV 988 &middot; Goldberg Variations</p>
-      <p class="text-gray-500 max-w-2xl mx-auto">
-        收录自 1933 年 Wanda Landowska 首次完整录音以来的经典演奏版本，
-        涵盖钢琴与羽管键琴等多种演绎方式。
+      <p class="text-gray-500 max-w-2xl mx-auto mb-8">
+        收录经典古典音乐录音，涵盖钢琴、羽管键琴、小提琴等多种乐器，
+        从 1930 年代至今的经典演绎。
       </p>
-      <a href="/recordings" class="btn btn-primary mt-8 inline-block">
-        浏览全部录音 &rarr;
-      </a>
+
+      <!-- Search box -->
+      <div class="max-w-xl mx-auto relative">
+        <input
+          type="text"
+          id="home-search"
+          placeholder="搜索演奏家、厂牌、年份..."
+          class="w-full px-5 py-3 pr-12 border border-gray-300 rounded-full text-lg focus:outline-none focus:ring-2 focus:ring-gold-400 shadow-sm"
+        />
+        <svg class="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+        <!-- Search results dropdown -->
+        <div id="search-results" class="hidden absolute z-10 w-full mt-2 bg-white rounded-lg shadow-lg border border-gray-200 max-h-80 overflow-y-auto text-left"></div>
+      </div>
     </section>
 
     <!-- Stats -->
@@ -70,15 +84,92 @@ const performers = [...new Set(recordings.map(r => r.performer))].length;
       </div>
     </section>
 
+    <!-- Browse by category -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-serif font-bold text-gold-800 mb-6">按分类浏览</h2>
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div class="card p-6">
+          <h3 class="font-bold text-gray-900 mb-3">按乐器</h3>
+          <div class="flex flex-wrap gap-2">
+            <a href="/recordings?instrument=Piano" class="filter-chip">Piano</a>
+            <a href="/recordings?instrument=Harpsichord" class="filter-chip">Harpsichord</a>
+            <a href="/recordings?instrument=Violin" class="filter-chip">Violin</a>
+          </div>
+        </div>
+        <div class="card p-6">
+          <h3 class="font-bold text-gray-900 mb-3">按年代</h3>
+          <div class="flex flex-wrap gap-2">
+            <a href="/recordings?yearMin=1930&yearMax=1960" class="filter-chip">1930-1960</a>
+            <a href="/recordings?yearMin=1960&yearMax=1990" class="filter-chip">1960-1990</a>
+            <a href="/recordings?yearMin=1990&yearMax=2025" class="filter-chip">1990-至今</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- About preview -->
     <section class="card p-8 text-center">
-      <h2 class="text-2xl font-serif font-bold text-gold-800 mb-4">关于哥德堡变奏曲</h2>
+      <h2 class="text-2xl font-serif font-bold text-gold-800 mb-4">关于本站</h2>
       <p class="text-gray-600 max-w-3xl mx-auto mb-4">
-        《哥德堡变奏曲》（BWV 988）是约翰·塞巴斯蒂安·巴赫于 1741 年出版的键盘作品，
-        由一首咏叹调和三十个变奏组成。它是巴洛克时期最宏伟的键盘作品之一，
-        也是音乐史上最深邃、最复杂的变奏曲。
+        本站收录古典音乐中《哥德堡变奏曲》的各类录音版本，
+        包括演奏家、录制年份、厂牌、介质类型等基本资料以及 CD 封面。
+        数据来源于 MusicBrainz 开放音乐数据库。
       </p>
       <a href="/about" class="btn btn-outline">了解更多 &rarr;</a>
     </section>
   </div>
+
+  <script>
+    const allRecordings = {recordings};
+    const searchInput = document.getElementById('home-search') as HTMLInputElement;
+    const resultsDiv = document.getElementById('search-results')!;
+
+    searchInput?.addEventListener('input', () => {
+      const q = searchInput.value.toLowerCase().trim();
+      if (q.length < 1) {
+        resultsDiv.classList.add('hidden');
+        return;
+      }
+
+      const matches = allRecordings.filter((r: any) =>
+        r.performer.toLowerCase().includes(q) ||
+        r.label.toLowerCase().includes(q) ||
+        String(r.year).includes(q) ||
+        r.instrument.toLowerCase().includes(q) ||
+        (r.notes && r.notes.toLowerCase().includes(q))
+      ).slice(0, 8);
+
+      if (matches.length === 0) {
+        resultsDiv.innerHTML = '<div class="px-4 py-3 text-gray-400">没有找到匹配的录音</div>';
+      } else {
+        resultsDiv.innerHTML = matches.map((r: any) => `
+          <a href="/recordings/${r.id}" class="flex items-center gap-3 px-4 py-3 hover:bg-gold-50 transition-colors border-b border-gray-100 last:border-0">
+            <div class="w-10 h-10 bg-gold-100 rounded overflow-hidden flex-shrink-0 flex items-center justify-center">
+              <img src="${r.coverUrl}" alt="" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.innerHTML='<span>♪</span>'"/>
+            </div>
+            <div>
+              <div class="font-medium text-gray-900">${r.performer}</div>
+              <div class="text-sm text-gray-500">${r.year} · ${r.label} · ${r.instrument}</div>
+            </div>
+          </a>
+        `).join('');
+      }
+      resultsDiv.classList.remove('hidden');
+    });
+
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+      if (!searchInput?.contains(e.target as Node) && !resultsDiv?.contains(e.target as Node)) {
+        resultsDiv?.classList.add('hidden');
+      }
+    });
+
+    // Navigate on Enter
+    searchInput?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const q = searchInput.value.trim();
+        if (q) window.location.href = `/recordings?search=${encodeURIComponent(q)}`;
+      }
+    });
+  </script>
 </Layout>

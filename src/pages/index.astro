@@ -9,6 +9,21 @@ const performers = [...new Set(recordings.map(r => r.performer))].length;
 
 const allPerformers = [...new Set(recordings.map(r => r.performer))].sort();
 const allLabels = [...new Set(recordings.map(r => r.label))].sort();
+
+// Decade stats for chart
+const decadeMap: Record<string, number> = {};
+recordings.forEach(r => {
+  const decade = `${Math.floor(r.year / 10) * 10}s`;
+  decadeMap[decade] = (decadeMap[decade] || 0) + 1;
+});
+const decades = Object.entries(decadeMap).sort(([a], [b]) => a.localeCompare(b));
+const maxCount = Math.max(...decades.map(([, v]) => v));
+const instruments = [...new Set(recordings.map(r => r.instrument))];
+const instrumentColors: Record<string, string> = {
+  Piano: 'bg-gold-500',
+  Harpsichord: 'bg-amber-700',
+  Violin: 'bg-emerald-600',
+};
 ---
 
 <Layout title="首页">
@@ -54,8 +69,64 @@ const allLabels = [...new Set(recordings.map(r => r.label))].sort();
         <div class="text-gray-500 text-sm mt-1">时间跨度</div>
       </div>
       <div class="card p-6 text-center">
-        <div class="text-3xl font-bold text-gold-700">2</div>
+        <div class="text-3xl font-bold text-gold-700">{instruments.length}</div>
         <div class="text-gray-500 text-sm mt-1">乐器类型</div>
+      </div>
+    </section>
+
+    <!-- Chart: recordings by decade -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-serif font-bold text-gold-800 mb-6">录音数量变化</h2>
+      <div class="card p-6">
+        <div class="flex items-end gap-2 sm:gap-3 h-48 mb-4">
+          {decades.map(([decade, count]) => {
+            const pct = Math.round((count / maxCount) * 100);
+            // Count per instrument in this decade
+            const decadeYear = parseInt(decade);
+            const decadeRecordings = recordings.filter(r => r.year >= decadeYear && r.year < decadeYear + 10);
+            const instCounts = instruments.map(inst => ({
+              inst,
+              count: decadeRecordings.filter(r => r.instrument === inst).length,
+              total: decadeRecordings.length,
+            }));
+            return (
+              <div class="flex-1 flex flex-col items-center justify-end h-full group relative">
+                {/* Stacked bars by instrument */}
+                <div class="w-full flex flex-col-reverse justify-start" style={`height: ${pct}%`}>
+                  {instCounts.filter(ic => ic.count > 0).map(ic => {
+                    const h = Math.round((ic.count / ic.total) * 100);
+                    return (
+                      <div
+                        class={`w-full ${instrumentColors[ic.inst] || 'bg-gray-400'} transition-all group-hover:opacity-80`}
+                        style={`height: ${h}%`}
+                        title={`${ic.inst}: ${ic.count}`}
+                      />
+                    );
+                  })}
+                </div>
+                {/* Tooltip */}
+                <div class="hidden group-hover:block absolute bottom-full mb-2 bg-gray-900 text-white text-xs rounded px-2 py-1 whitespace-nowrap z-10">
+                  {decade}: {count} 张
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        {/* X axis labels */}
+        <div class="flex gap-2 sm:gap-3">
+          {decades.map(([decade]) => (
+            <div class="flex-1 text-center text-xs text-gray-500">{decade}</div>
+          ))}
+        </div>
+        {/* Legend */}
+        <div class="flex justify-center gap-4 mt-4 text-sm text-gray-600">
+          {instruments.map(inst => (
+            <div class="flex items-center gap-1">
+              <div class={`w-3 h-3 rounded-sm ${instrumentColors[inst] || 'bg-gray-400'}`} />
+              <span>{inst}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
 

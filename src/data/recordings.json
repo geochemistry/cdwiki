@@ -52,6 +52,32 @@
     "isLandmark": false
   },
   {
+    "id": "galling-1975",
+    "performer": "Martin Galling",
+    "year": 1975,
+    "label": "Nonesuch",
+    "catalogNumber": "H-71307",
+    "format": "LP",
+    "instrument": "Harpsichord",
+    "country": "Germany",
+    "notes": "Galling's clean and precise recording on a two-manual harpsichord, an early Nonesuch release.",
+    "coverUrl": "/covers/galling-1975.jpg",
+    "isLandmark": false
+  },
+  {
+    "id": "leonhardt-1978",
+    "performer": "Gustav Leonhardt",
+    "year": 1978,
+    "label": "Seon",
+    "catalogNumber": "SN-68080",
+    "format": "LP",
+    "instrument": "Harpsichord",
+    "country": "Netherlands",
+    "notes": "Leonhardt's second recording, more refined and intimate than his 1965 version.",
+    "coverUrl": "/covers/leonhardt-1978.jpg",
+    "isLandmark": false
+  },
+  {
     "id": "gould-1981",
     "performer": "Glenn Gould",
     "year": 1981,
@@ -63,6 +89,32 @@
     "notes": "Gould's famous re-recording, slower and more introspective than his 1955 version. One of the most discussed pairs of recordings in classical music history.",
     "coverUrl": "/covers/gould-1981.jpg",
     "isLandmark": true
+  },
+  {
+    "id": "pinnock-1980",
+    "performer": "Trevor Pinnock",
+    "year": 1980,
+    "label": "CRD",
+    "catalogNumber": "CRD 3340",
+    "format": "LP",
+    "instrument": "Harpsichord",
+    "country": "UK",
+    "notes": "Pinnock's crisp and rhythmically vital recording with the English Concert, bringing chamber music energy to the work.",
+    "coverUrl": "/covers/pinnock-1980.jpg",
+    "isLandmark": false
+  },
+  {
+    "id": "gulda-1973",
+    "performer": "Friedrich Gulda",
+    "year": 1973,
+    "label": "Decca",
+    "catalogNumber": "482 8050",
+    "format": "LP",
+    "instrument": "Piano",
+    "country": "Austria",
+    "notes": "Gulda's unconventional and jazz-inflected interpretation, a unique take that divides opinion but fascinates listeners.",
+    "coverUrl": "/covers/gulda-1973.jpg",
+    "isLandmark": false
   },
   {
     "id": "leonhardt-1965",
@@ -104,6 +156,32 @@
     "isLandmark": false
   },
   {
+    "id": "ruzickova-1976",
+    "performer": "Zuzana Růžičková",
+    "year": 1976,
+    "label": "Supraphon",
+    "catalogNumber": "1112 1501",
+    "format": "LP",
+    "instrument": "Harpsichord",
+    "country": "Czechoslovakia",
+    "notes": "Růžičková's elegant recording, one of the few made behind the Iron Curtain. A survivor of the Holocaust, her Bach carries deep emotional weight.",
+    "coverUrl": "/covers/ruzickova-1976.jpg",
+    "isLandmark": false
+  },
+  {
+    "id": "martins-1979",
+    "performer": "João Carlos Martins",
+    "year": 1979,
+    "label": "CBS Masterworks",
+    "catalogNumber": "M2 35894",
+    "format": "LP",
+    "instrument": "Piano",
+    "country": "Brazil",
+    "notes": "Martins' passionate recording, part of his lifelong dedication to Bach's keyboard works despite severe hand injuries.",
+    "coverUrl": "/covers/martins-1979.jpg",
+    "isLandmark": false
+  },
+  {
     "id": "newman-1969",
     "performer": "Anthony Newman",
     "year": 1969,
@@ -114,6 +192,19 @@
     "country": "USA",
     "notes": "Newman's virtuosic and rhythmically vital recording, one of the first to bring a fresh energy to harpsichord Bach in the modern era.",
     "coverUrl": "/covers/newman-1969.jpg",
+    "isLandmark": false
+  },
+  {
+    "id": "nikolayeva-1987",
+    "performer": "Tatiana Nikolayeva",
+    "year": 1987,
+    "label": "Melodiya",
+    "catalogNumber": "A10 00395 001",
+    "format": "LP",
+    "instrument": "Piano",
+    "country": "USSR",
+    "notes": "Nikolayeva's authoritative recording from the great Russian Bach tradition. She was Shostakovich's muse for the 24 Preludes and Fugues.",
+    "coverUrl": "/covers/nikolayeva-1987.jpg",
     "isLandmark": false
   },
   {
@@ -130,6 +221,32 @@
     "isLandmark": false
   },
   {
+    "id": "ross-1985",
+    "performer": "Scott Ross",
+    "year": 1985,
+    "label": "Erato",
+    "catalogNumber": "2292-45231-2",
+    "format": "CD",
+    "instrument": "Harpsichord",
+    "country": "USA/France",
+    "notes": "Ross's landmark recording of the complete Bach keyboard works. Tragically, Ross died at 38, making this recording a precious document.",
+    "coverUrl": "/covers/ross-1985.jpg",
+    "isLandmark": false
+  },
+  {
+    "id": "gilbert-1985",
+    "performer": "Kenneth Gilbert",
+    "year": 1985,
+    "label": "Archiv Produktion",
+    "catalogNumber": "415 132-2",
+    "format": "CD",
+    "instrument": "Harpsichord",
+    "country": "Canada/UK",
+    "notes": "Gilbert's refined and scholarly recording for Archiv, on a Taskin harpsichord.",
+    "coverUrl": "/covers/gilbert-1985.jpg",
+    "isLandmark": false
+  },
+  {
     "id": "koopman-1988",
     "performer": "Ton Koopman",
     "year": 1988,
@@ -140,6 +257,45 @@
     "country": "Netherlands",
     "notes": "Koopman's energetic and dance-inflected recording on a Ruckers harpsichord.",
     "coverUrl": "/covers/koopman-1988.jpg",
+    "isLandmark": false
+  },
+  {
+    "id": "jarrett-1989",
+    "performer": "Keith Jarrett",
+    "year": 1989,
+    "label": "ECM",
+    "catalogNumber": "1433 842",
+    "format": "CD",
+    "instrument": "Harpsichord",
+    "country": "USA",
+    "notes": "Jarrett's surprising choice to record on harpsichord. The jazz pianist brings a unique rhythmic sensibility to Bach.",
+    "coverUrl": "/covers/jarrett-1989.jpg",
+    "isLandmark": true
+  },
+  {
+    "id": "tipo-1990",
+    "performer": "Maria Tipo",
+    "year": 1990,
+    "label": "EMI Classics",
+    "catalogNumber": "CDC 7 54036 2",
+    "format": "CD",
+    "instrument": "Piano",
+    "country": "Italy",
+    "notes": "Tipo's crystalline and elegant recording, praised for its clarity and singing tone.",
+    "coverUrl": "/covers/tipo-1990.jpg",
+    "isLandmark": false
+  },
+  {
+    "id": "hantai-1993",
+    "performer": "Pierre Hantaï",
+    "year": 1993,
+    "label": "Opus 111",
+    "catalogNumber": "OPS 30-104",
+    "format": "CD",
+    "instrument": "Harpsichord",
+    "country": "France",
+    "notes": "Hantaï's deeply musical recording, bringing French harpsichord tradition to its finest expression in Bach.",
+    "coverUrl": "/covers/hantai-1993.jpg",
     "isLandmark": false
   },
   {
@@ -166,6 +322,45 @@
     "country": "UK",
     "notes": "Hogwood's historically informed recording on an original Ruckers harpsichord from 1640.",
     "coverUrl": "/covers/hogwood-1993.jpg",
+    "isLandmark": false
+  },
+  {
+    "id": "hill-1995",
+    "performer": "Robert Hill",
+    "year": 1995,
+    "label": "Arte Nova",
+    "catalogNumber": "74321 34296 2",
+    "format": "CD",
+    "instrument": "Harpsichord",
+    "country": "USA/Germany",
+    "notes": "Hill's thoughtful recording, notable for its attention to ornamentation and historical style.",
+    "coverUrl": "/covers/hill-1995.jpg",
+    "isLandmark": false
+  },
+  {
+    "id": "macgregor-1997",
+    "performer": "Joanna MacGregor",
+    "year": 1997,
+    "label": "Collins Classics",
+    "catalogNumber": "14882",
+    "format": "CD",
+    "instrument": "Piano",
+    "country": "UK",
+    "notes": "MacGregor's fresh and contemporary approach, bringing a modern pianist's perspective to the work.",
+    "coverUrl": "/covers/macgregor-1997.jpg",
+    "isLandmark": false
+  },
+  {
+    "id": "koroliov-1999",
+    "performer": "Evgeni Koroliov",
+    "year": 1999,
+    "label": "Tacet",
+    "catalogNumber": "Tacet 72",
+    "format": "CD",
+    "instrument": "Piano",
+    "country": "Russia/Germany",
+    "notes": "Koroliov's deeply felt recording, a hidden gem among Goldberg recordings, praised for its introspective beauty.",
+    "coverUrl": "/covers/koroliov-1999.jpg",
     "isLandmark": false
   },
   {
@@ -221,6 +416,19 @@
     "isLandmark": false
   },
   {
+    "id": "serkin-2003",
+    "performer": "Peter Serkin",
+    "year": 2003,
+    "label": "BMG",
+    "catalogNumber": "82876 55762 2",
+    "format": "CD",
+    "instrument": "Piano",
+    "country": "USA",
+    "notes": "Serkin's deeply intellectual and sensitive recording, continuing the musical legacy of his father Rudolf Serkin.",
+    "coverUrl": "/covers/serkin-2003.jpg",
+    "isLandmark": false
+  },
+  {
     "id": "wang-2003",
     "performer": "Yuja Wang",
     "year": 2003,
@@ -231,6 +439,71 @@
     "country": "China",
     "notes": "Wang's youthful and technically dazzling take on the Goldberg Variations.",
     "coverUrl": "/covers/wang-2003.jpg",
+    "isLandmark": false
+  },
+  {
+    "id": "demidenko-2005",
+    "performer": "Nikolai Demidenko",
+    "year": 2005,
+    "label": "Hyperion",
+    "catalogNumber": "CDA67436",
+    "format": "CD",
+    "instrument": "Piano",
+    "country": "Russia/UK",
+    "notes": "Demidenko's commanding recording, combining Russian pianistic tradition with Bach's contrapuntal clarity.",
+    "coverUrl": "/covers/demidenko-2005.jpg",
+    "isLandmark": false
+  },
+  {
+    "id": "stadtfeld-2005",
+    "performer": "Martin Stadtfeld",
+    "year": 2005,
+    "label": "Deutsche Grammophon",
+    "catalogNumber": "477 5334",
+    "format": "CD",
+    "instrument": "Piano",
+    "country": "Germany",
+    "notes": "Stadtfeld's young and energetic recording, winner of the International Bach Competition.",
+    "coverUrl": "/covers/stadtfeld-2005.jpg",
+    "isLandmark": false
+  },
+  {
+    "id": "dinnerstein-2007",
+    "performer": "Simone Dinnerstein",
+    "year": 2007,
+    "label": "Telarc",
+    "catalogNumber": "CD-80692",
+    "format": "CD",
+    "instrument": "Piano",
+    "country": "USA",
+    "notes": "Dinnerstein's breakout recording, self-financed and recorded at her home. It became a surprise bestseller and launched her career.",
+    "coverUrl": "/covers/dinnerstein-2007.jpg",
+    "isLandmark": true
+  },
+  {
+    "id": "bahrami-2007",
+    "performer": "Ramin Bahrami",
+    "year": 2007,
+    "label": "Decca",
+    "catalogNumber": "476 3198",
+    "format": "CD",
+    "instrument": "Piano",
+    "country": "Iran/Italy",
+    "notes": "Bahrami's warm and lyrical recording, an Italian-Iranian pianist who has become a Bach specialist.",
+    "coverUrl": "/covers/bahrami-2007.jpg",
+    "isLandmark": false
+  },
+  {
+    "id": "zhu-2007",
+    "performer": "Zhu Xiaomei",
+    "year": 2007,
+    "label": "Mirare",
+    "catalogNumber": "MIR 008",
+    "format": "CD",
+    "instrument": "Piano",
+    "country": "China/France",
+    "notes": "Zhu Xiaomei's earlier and more spontaneous recording, before her 2017 release.",
+    "coverUrl": "/covers/zhu-2007.jpg",
     "isLandmark": false
   },
   {
@@ -260,6 +533,19 @@
     "isLandmark": false
   },
   {
+    "id": "fray-2014",
+    "performer": "David Fray",
+    "year": 2014,
+    "label": "Erato",
+    "catalogNumber": "2564 63534 2",
+    "format": "CD",
+    "instrument": "Piano",
+    "country": "France",
+    "notes": "Fray's poetic and colorful recording, praised for its singing tone and musical intelligence.",
+    "coverUrl": "/covers/fray-2014.jpg",
+    "isLandmark": false
+  },
+  {
     "id": "sokolov-2015",
     "performer": "Grigory Sokolov",
     "year": 2015,
@@ -270,19 +556,6 @@
     "country": "Russia",
     "notes": "Sokolov's live recording, praised for its extraordinary clarity and emotional depth.",
     "coverUrl": "/covers/sokolov-2015.jpg",
-    "isLandmark": false
-  },
-  {
-    "id": "zhu-2017",
-    "performer": "Zhu Xiaomei",
-    "year": 2017,
-    "label": "Ambroisie",
-    "catalogNumber": "AMB 9990",
-    "format": "CD",
-    "instrument": "Piano",
-    "country": "China/France",
-    "notes": "Zhu Xiaomei's deeply personal interpretation, blending Eastern and Western musical sensibilities.",
-    "coverUrl": "/covers/zhu-2017.jpg",
     "isLandmark": false
   },
   {
@@ -297,6 +570,84 @@
     "notes": "Jansen's arrangement for solo violin, bringing a warm singing tone to the keyboard work.",
     "coverUrl": "/covers/jansen-2016.jpg",
     "isLandmark": false
+  },
+  {
+    "id": "alard-2018",
+    "performer": "Benjamin Alard",
+    "year": 2018,
+    "label": "Harmonia Mundi",
+    "catalogNumber": "HMM 902290",
+    "format": "CD",
+    "instrument": "Harpsichord",
+    "country": "France",
+    "notes": "Alard's recording on a historical Silbermann harpsichord, part of his complete Bach keyboard cycle.",
+    "coverUrl": "/covers/alard-2018.jpg",
+    "isLandmark": false
+  },
+  {
+    "id": "trifonov-2018",
+    "performer": "Daniil Trifonov",
+    "year": 2018,
+    "label": "Deutsche Grammophon",
+    "catalogNumber": "483 5437",
+    "format": "CD",
+    "instrument": "Piano",
+    "country": "Russia",
+    "notes": "Trifonov's dazzling recording, bringing his legendary virtuosity and poetic depth to Bach's masterpiece.",
+    "coverUrl": "/covers/trifonov-2018.jpg",
+    "isLandmark": false
+  },
+  {
+    "id": "colli-2019",
+    "performer": "Federico Colli",
+    "year": 2019,
+    "label": "Chandos",
+    "catalogNumber": "CHAN 20120",
+    "format": "CD",
+    "instrument": "Piano",
+    "country": "Italy",
+    "notes": "Colli's refined and intellectual recording, bringing Italian pianistic elegance to the Variations.",
+    "coverUrl": "/covers/colli-2019.jpg",
+    "isLandmark": false
+  },
+  {
+    "id": "rondeau-2019",
+    "performer": "Jean Rondeau",
+    "year": 2019,
+    "label": "Erato",
+    "catalogNumber": "9029540217",
+    "format": "CD",
+    "instrument": "Harpsichord",
+    "country": "France",
+    "notes": "Rondeau's youthful and charismatic recording, from the young French harpsichordist who has brought new audiences to the instrument.",
+    "coverUrl": "/covers/rondeau-2019.jpg",
+    "isLandmark": false
+  },
+  {
+    "id": "bavouzet-2019",
+    "performer": "Jean-Efflam Bavouzet",
+    "year": 2019,
+    "label": "Chandos",
+    "catalogNumber": "CHAN 20143",
+    "format": "CD",
+    "instrument": "Piano",
+    "country": "France",
+    "notes": "Bavouzet's sparkling and transparent recording, praised for its clarity and rhythmic vitality.",
+    "coverUrl": "/covers/bavouzet-2019.jpg",
+    "isLandmark": false
+  },
+  {
+    "id": "langlang-2020",
+    "performer": "Lang Lang",
+    "year": 2020,
+    "label": "Deutsche Grammophon",
+    "catalogNumber": "481 8651",
+    "format": "CD",
+    "instrument": "Piano",
+    "country": "China",
+    "notes": "Lang Lang's much-anticipated recording, a bold and personal interpretation that divided critics but showcased his artistry.",
+    "coverUrl": "/covers/langlang-2020.jpg",
+    "isLandmark": true
   },
   {
     "id": "volodos-2020",
@@ -325,16 +676,29 @@
     "isLandmark": false
   },
   {
-    "id": "bavouzet-2019",
-    "performer": "Jean-Efflam Bavouzet",
-    "year": 2019,
-    "label": "Chandos",
-    "catalogNumber": "CHAN 20143",
+    "id": "olafsson-2023",
+    "performer": "Víkingur Ólafsson",
+    "year": 2023,
+    "label": "Deutsche Grammophon",
+    "catalogNumber": "486 4802",
     "format": "CD",
     "instrument": "Piano",
+    "country": "Iceland",
+    "notes": "Ólafsson's much-anticipated recording from the 'Icelandic Glenn Gould', praised for its clarity and modern sensibility.",
+    "coverUrl": "/covers/olafsson-2023.jpg",
+    "isLandmark": true
+  },
+  {
+    "id": "verlet-1994",
+    "performer": "Blandine Verlet",
+    "year": 1994,
+    "label": "Auvidis",
+    "catalogNumber": "E 8618",
+    "format": "CD",
+    "instrument": "Harpsichord",
     "country": "France",
-    "notes": "Bavouzet's sparkling and transparent recording, praised for its clarity and rhythmic vitality.",
-    "coverUrl": "/covers/bavouzet-2019.jpg",
+    "notes": "Verlet's elegant and refined recording from the French harpsichord tradition.",
+    "coverUrl": "/covers/verlet-1994.jpg",
     "isLandmark": false
   }
 ]
